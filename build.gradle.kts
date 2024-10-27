@@ -1,4 +1,4 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.sonarqube.gradle.SonarTask
 
 plugins {
@@ -20,8 +20,8 @@ java {
     targetCompatibility = JavaVersion.VERSION_17
 }
 
-tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "17"
+kotlin {
+    compilerOptions.jvmTarget.set(JvmTarget.JVM_17)
 }
 
 tasks.test {
@@ -68,7 +68,7 @@ dependencies {
     implementation("org.telegram:telegrambots:6.9.7.1")
     implementation("org.telegram:telegrambots-spring-boot-starter:6.9.7.1")
 
-    compileOnly("org.jetbrains:annotations:25.0.0")
+    compileOnly("org.jetbrains:annotations:26.0.1")
 
     runtimeOnly("jakarta.xml.ws:jakarta.xml.ws-api:4.0.2") {
         because("JAXB APIs are considered to be Java EE APIs and are completely removed from JDK 11")
@@ -79,6 +79,6 @@ dependencies {
 
     testImplementation(platform("org.junit:junit-bom:5.11.3"))
     testImplementation("org.junit.jupiter:junit-jupiter")
-    testImplementation("io.mockk:mockk:1.13.12")
+    testImplementation("io.mockk:mockk:1.13.13")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.9.0")
 }
